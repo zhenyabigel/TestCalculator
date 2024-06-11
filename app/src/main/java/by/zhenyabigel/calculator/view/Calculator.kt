@@ -8,11 +8,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -38,14 +39,26 @@ fun Calculator (
                 .align(Alignment.BottomCenter),
             verticalArrangement = Arrangement.spacedBy(buttonSpacing)
         ) {
-            Text(text = state.firstNumber + (state.operation ?: "") + state.secondNumber,
+            Text(text = state.firstNumber + " " + (state.operation ?: "") +"+ "+ state.secondNumber,
                 textAlign = TextAlign.End,
+                color = Color.White,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 32.dp),
-                fontSize = 100.sp,
-                maxLines = 2)
+                    .padding(vertical = 20.dp),
+                fontSize = 60.sp,
+                fontWeight = FontWeight.W300,
+                maxLines = 1)
 
+            Text(text = state.result,
+                textAlign = TextAlign.End,
+                color = LightGray,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 36.dp),
+                fontSize = 60.sp,
+                fontWeight = FontWeight.SemiBold,
+                maxLines = 1)
+            Divider(color = LightGray, thickness = 1.dp, modifier = Modifier.padding(vertical = 8.dp))
             Row(modifier = Modifier
                 .fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(buttonSpacing)){

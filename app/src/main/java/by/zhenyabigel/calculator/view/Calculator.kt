@@ -39,7 +39,7 @@ fun Calculator (
                 .align(Alignment.BottomCenter),
             verticalArrangement = Arrangement.spacedBy(buttonSpacing)
         ) {
-            Text(text = state.firstNumber + " " + (state.operation ?: "") +"+ "+ state.secondNumber,
+            Text(text = state.firstNumber + " " + (state.operation?.symbol ?: "") + state.secondNumber,
                 textAlign = TextAlign.End,
                 color = Color.White,
                 modifier = Modifier
@@ -63,7 +63,7 @@ fun Calculator (
                 .fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(buttonSpacing)){
                 CalculatorButton(
-                    symbol = "C",
+                    symbol = if (!state.isClearBtn) "AC" else "C",
                     textColor = Color.Black,
                     modifier = Modifier
                         .background(LightRed)
@@ -123,7 +123,7 @@ fun Calculator (
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CalculatorAction.Number(7))
+                        onAction(CalculatorAction.Number(8))
                     })
                 CalculatorButton(
                     symbol = "9",
@@ -132,7 +132,7 @@ fun Calculator (
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CalculatorAction.Number(7))
+                        onAction(CalculatorAction.Number(9))
                     })
                 CalculatorButton(
                     symbol = "×",
@@ -156,7 +156,7 @@ fun Calculator (
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CalculatorAction.Number(7))
+                        onAction(CalculatorAction.Number(4))
                     })
                 CalculatorButton(
                     symbol = "5",
@@ -165,7 +165,7 @@ fun Calculator (
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CalculatorAction.Number(7))
+                        onAction(CalculatorAction.Number(5))
                     })
                 CalculatorButton(
                     symbol = "6",
@@ -174,7 +174,7 @@ fun Calculator (
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CalculatorAction.Number(7))
+                        onAction(CalculatorAction.Number(6))
                     })
                 CalculatorButton(
                     symbol = "−",
@@ -198,7 +198,7 @@ fun Calculator (
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CalculatorAction.Number(7))
+                        onAction(CalculatorAction.Number(1))
                     })
                 CalculatorButton(
                     symbol = "2",
@@ -207,7 +207,7 @@ fun Calculator (
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CalculatorAction.Number(7))
+                        onAction(CalculatorAction.Number(2))
                     })
                 CalculatorButton(
                     symbol = "3",
@@ -216,7 +216,7 @@ fun Calculator (
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CalculatorAction.Number(7))
+                        onAction(CalculatorAction.Number(3))
                     })
                 CalculatorButton(
                     symbol = "+",
@@ -240,7 +240,7 @@ fun Calculator (
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CalculatorAction.Number(7))
+                        onAction(CalculatorAction.Number(0))
                     })
                 CalculatorButton(
                     symbol = ".",

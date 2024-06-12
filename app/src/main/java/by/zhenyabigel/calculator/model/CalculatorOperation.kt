@@ -7,6 +7,4 @@ sealed class CalculatorOperation (val symbol:String) {
     object Divide: CalculatorOperation("/")
     object Percent: CalculatorOperation("%")
     object ChangeOfSing: CalculatorOperation("+/-")
-
-
 }

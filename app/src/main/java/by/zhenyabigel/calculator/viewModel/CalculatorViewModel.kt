@@ -1,5 +1,6 @@
 package by.zhenyabigel.calculator.viewModel
 
+import androidx.collection.emptyLongSet
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import by.zhenyabigel.calculator.model.CalculatorAction
@@ -17,7 +18,44 @@ class CalculatorViewModel: ViewModel() {
             is CalculatorAction.Clear -> performDeletion()
             is CalculatorAction.Operation -> putOperation(action.operation)
             is CalculatorAction.Calculate -> performCalculation()
+            is CalculatorAction.ChangeOfSing -> performChangeOfSing()
+            is CalculatorAction.Percent -> convertToPercentage()
         }
+    }
+
+    private fun convertToPercentage() {
+        if(state.operation == null){
+            state = state.copy(
+                firstNumber = (state.firstNumber.toDoubleOrNull()?.div(100)).toString()
+            )
+            return
+        }
+        state = state.copy(
+            secondNumber = (state.secondNumber.toDoubleOrNull()?.div(100)).toString()
+        )
+    }
+
+    private fun performChangeOfSing() {
+        if(state.operation == null){
+            if (state.firstNumber.contains("-")) {
+                state = state.copy(firstNumber = state.firstNumber.removePrefix("-"))
+            }
+            else{
+                state = state.copy(
+                    firstNumber = "-"+ state.firstNumber
+                )
+            }
+            return
+        }
+            if (state.secondNumber.contains("-")) {
+                state = state.copy(secondNumber = state.secondNumber.removePrefix("-"))
+            }
+            else{
+                state = state.copy(
+                    secondNumber = "-"+ state.secondNumber
+                )
+            }
+
     }
 
     private fun performDeletion() {
@@ -45,6 +83,8 @@ class CalculatorViewModel: ViewModel() {
     }
 
     private fun performCalculation() {
+        state = state.copy(isClearBtn = false)
+
         val firstNumber = state.firstNumber.toDoubleOrNull()
         val secondNumber = state.secondNumber.toDoubleOrNull()
         if(firstNumber != null && secondNumber!= null){
@@ -53,12 +93,9 @@ class CalculatorViewModel: ViewModel() {
                 is CalculatorOperation.Divide -> firstNumber / secondNumber
                 is CalculatorOperation.Subtraction -> firstNumber - secondNumber
                 is CalculatorOperation.Multiply -> firstNumber * secondNumber
-                CalculatorOperation.ChangeOfSing -> TODO()
-                CalculatorOperation.Percent -> TODO()
                 null -> return
             }
             state = state.copy(
-
                 result = result.toString().take(15)
             )
         }
@@ -66,6 +103,13 @@ class CalculatorViewModel: ViewModel() {
     }
 
     private fun  putOperation(operation: CalculatorOperation) {
+        if(state.result.isNotBlank()){
+            state = state.copy(
+                firstNumber = state.result,
+                result = "",
+                secondNumber = ""
+            )
+        }
         if(state.firstNumber.isNotBlank()){
             state = state.copy(operation = operation)
         }

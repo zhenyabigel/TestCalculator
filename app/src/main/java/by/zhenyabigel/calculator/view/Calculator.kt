@@ -39,7 +39,7 @@ fun Calculator (
                 .align(Alignment.BottomCenter),
             verticalArrangement = Arrangement.spacedBy(buttonSpacing)
         ) {
-            Text(text = state.firstNumber + " " + (state.operation?.symbol ?: "") + state.secondNumber,
+            Text(text = state.firstNumber + " " + (state.operation?.symbol ?: "") +" " + state.secondNumber,
                 textAlign = TextAlign.End,
                 color = Color.White,
                 modifier = Modifier
@@ -79,7 +79,7 @@ fun Calculator (
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CalculatorAction.Operation(CalculatorOperation.ChangeOfSing))
+                        onAction(CalculatorAction.ChangeOfSing)
                     })
                 CalculatorButton(
                     symbol = "%",
@@ -89,7 +89,7 @@ fun Calculator (
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CalculatorAction.Operation(CalculatorOperation.Percent))
+                        onAction(CalculatorAction.Percent)
 
                     })
                 CalculatorButton(

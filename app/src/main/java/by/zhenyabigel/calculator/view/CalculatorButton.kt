@@ -18,24 +18,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
 
 @Composable
-fun CalculatorButton (
-    symbol:String,
-    textColor: Color = Color.White,
-    modifier: Modifier,
-    onClick:() -> Unit
-){
+fun CalculatorButton(
+    symbol: String, textColor: Color = Color.White, modifier: Modifier, onClick: () -> Unit
+) {
 
-    Box( contentAlignment = Alignment.Center,
+    Box(contentAlignment = Alignment.Center,
         modifier = Modifier
             .clip(RoundedCornerShape(11.dp))
-            .clickable {onClick()}
-            .then(modifier)
-    ){
+            .clickable { onClick() }
+            .then(modifier)) {
         Text(
-            text = symbol,
-            fontSize = 40.sp,
-            color = textColor,
-            fontWeight = FontWeight.W400
+            text = symbol, fontSize = 40.sp, color = textColor, fontWeight = FontWeight.W400
         )
     }
 }

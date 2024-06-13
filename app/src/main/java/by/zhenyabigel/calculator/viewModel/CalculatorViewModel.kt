@@ -1,6 +1,5 @@
 package by.zhenyabigel.calculator.viewModel
 
-import androidx.collection.emptyLongSet
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import by.zhenyabigel.calculator.model.CalculatorAction
@@ -37,24 +36,22 @@ class CalculatorViewModel: ViewModel() {
 
     private fun performChangeOfSing() {
         if(state.operation == null){
-            if (state.firstNumber.contains("-")) {
-                state = state.copy(firstNumber = state.firstNumber.removePrefix("-"))
-            }
-            else{
-                state = state.copy(
+            state = if (state.firstNumber.contains("-")) {
+                state.copy(firstNumber = state.firstNumber.removePrefix("-"))
+            } else{
+                state.copy(
                     firstNumber = "-"+ state.firstNumber
                 )
             }
             return
         }
-            if (state.secondNumber.contains("-")) {
-                state = state.copy(secondNumber = state.secondNumber.removePrefix("-"))
-            }
-            else{
-                state = state.copy(
-                    secondNumber = "-"+ state.secondNumber
-                )
-            }
+        state = if (state.secondNumber.contains("-")) {
+            state.copy(secondNumber = state.secondNumber.removePrefix("-"))
+        } else{
+            state.copy(
+                secondNumber = "-"+ state.secondNumber
+            )
+        }
 
     }
 
